@@ -13,8 +13,8 @@ function init(el) {
     return;
   }
 
-  const container = el.dataset.tocContainer ?
-    findOne(el.dataset.tocContainer) || document.body : document.body;
+  const container = el.dataset.container ?
+    findOne(el.dataset.container) || document.body : document.body;
   const selectors = el.dataset.toc.split(',').map(s => s.trim());
   const tocItems = [];
   const offset = el.dataset.tocOffset ? parseInt(el.dataset.tocOffset, 10) : 1;
