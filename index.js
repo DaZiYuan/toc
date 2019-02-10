@@ -15,31 +15,31 @@ function init(el) {
 
   const container = el.dataset.container ?
     findOne(el.dataset.container) || document.body : document.body;
-  const selectors = el.dataset.toc.split(',').map(s => s.trim());
+  // const selectors = el.dataset.toc.split(',').map(s => s.trim());
   const tocItems = [];
   const offset = el.dataset.tocOffset ? parseInt(el.dataset.tocOffset, 10) : 1;
   let i = 1;
 
   // Building dict
-  selectors.forEach(selector => {
-    const items = find(selector, container);
+  // selectors.forEach(selector => {
+  const items = find(el.dataset.toc, container);
 
-    items.forEach(item => {
-      // Keep the id if already there
-      const index = item.id || `toc-${i++}`;
-      const text = item.dataset.tocTitle ?
-      item.dataset.tocTitle.trim() : item.textContent.trim();
-      const sanitizedClassName = selector.replace(/((:+[\w-\d]*)|[^A-z0-9-\s])/g, ' ').replace(/\s{2,}/g, ' ').trim();
-      const className = `toc-${sanitizedClassName}`;
+  items.forEach(item => {
+    // Keep the id if already there
+    const index = item.id || `toc-${i++}`;
+    const text = item.dataset.tocTitle ?
+    item.dataset.tocTitle.trim() : item.textContent.trim();
+    const sanitizedClassName = item.tagName.toLowerCase().replace(/((:+[\w-\d]*)|[^A-z0-9-\s])/g, ' ').replace(/\s{2,}/g, ' ').trim();
+    const className = `toc-${sanitizedClassName}`;
 
-      // Set it if none
-      if (item.id !== index) {
-        item.id = index;
-      }
+    // Set it if none
+    if (item.id !== index) {
+      item.id = index;
+    }
 
-      tocItems.push({ index, text, className });
-    });
+    tocItems.push({ index, text, className });
   });
+  // });
 
   let html = '<ul>';
   const triggerOptions = [];
