@@ -26,7 +26,8 @@ function init(el) {
 
   items.forEach(item => {
     // Keep the id if already there
-    const index = item.id || `toc-${i++}`;
+    const tmpId = item.id ? '' : `top-${item.id}`;
+    const index = tmpId || `toc-${i++}`;
     const text = item.dataset.tocTitle ?
     item.dataset.tocTitle.trim() : item.textContent.trim();
     const sanitizedClassName = item.tagName.toLowerCase().replace(/((:+[\w-\d]*)|[^A-z0-9-\s])/g, ' ').replace(/\s{2,}/g, ' ').trim();
